@@ -3,15 +3,16 @@ import path from "path";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 import session from "express-session";
 import cors from "cors";
-
 import { Request, Response, NextFunction } from "express";
 
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, ".env")});
 
 const app: express.Application = express();
+
+app.set("port", process.env.PORT || "8080");
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   morgan("dev")(req, res, next);
@@ -39,6 +40,6 @@ app.use(session({
   saveUninitialized: false,
 }));
 
-app.listen(process.env.PORT, () => {
-  console.log("server on ", process.env.PORT);
+app.listen(app.get("port"), () => {
+  console.log("server on ", app.get("port"));
 });
