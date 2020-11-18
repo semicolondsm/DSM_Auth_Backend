@@ -17,22 +17,27 @@
   },
   "homepage": "https://github.com/semicolonDSM/DSM_Auth_Backend#readme",
   "dependencies": {
+    "@types/bluebird": "^3.5.33",
     "@types/body-parser": "^1.19.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.8",
     "@types/express-session": "^1.17.2",
     "@types/morgan": "^1.9.2",
+    "@types/validator": "^13.1.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "@types/express": "github:types/express",
-    "@types/node": "^14.14.7",
+    "@types/node": "^14.14.8",
     "nodemon": "^2.0.6",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.5"
