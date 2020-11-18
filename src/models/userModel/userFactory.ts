@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
-import { SequelizeAttributes } from "./index.d";
+import { SequelizeAttributes } from "../sequelize.attributes";
 import { UserAttributes } from "./attributes";
-import { UserInterface } from "./interfaces";
+import { UserInterface } from "../model.interfaces";
 
 export const UserFactory = (sequelize: Sequelize.Sequelize): Sequelize.ModelCtor<UserInterface> => {
   const attributes: SequelizeAttributes<UserAttributes> = {

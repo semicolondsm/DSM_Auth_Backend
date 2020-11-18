@@ -1,6 +1,6 @@
 import { sequelize } from "../config/connection";
-import { DbInterface } from "../db/db.interface";
-import { UserFactory } from "./userFactory";
+import { DbInterface } from "./db.interface";
+import { UserFactory } from "./userModel/userFactory";
 
 export const createModels = (): DbInterface => {
   const db: DbInterface = {

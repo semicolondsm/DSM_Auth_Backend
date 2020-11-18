@@ -1,6 +1,5 @@
 import Sequelize from "sequelize";
-import { UserAttributes } from "../models/attributes"
-import { UserInterface } from "../models/interfaces"
+import { UserInterface } from "./model.interfaces"
 
 export interface DbInterface {
   sequelize: Sequelize.Sequelize;
