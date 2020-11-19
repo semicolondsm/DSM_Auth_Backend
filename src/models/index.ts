@@ -3,7 +3,7 @@ import { DbInterface } from "./defaultInterfaceAttributes/db.interface";
 import { UserFactory } from "./userModel/userFactory";
 import { ConsumerFactory } from "./consumerModel/consumerFactory";
 
-export const createModels = (): DbInterface => {
+const createModels = (): DbInterface => {
   const db: DbInterface = {
     sequelize,
     User: UserFactory(sequelize),
@@ -11,4 +11,6 @@ export const createModels = (): DbInterface => {
   }
   return db;
 }
+
+export const db = createModels();
 
