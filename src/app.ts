@@ -9,6 +9,7 @@ import cors from "cors";
 
 import { Request, Response, NextFunction } from "express";
 import { db } from "./models";
+import dsmAuthRouter from "./routes";
 
 dotenv.config({ path: path.join(__dirname, ".env")});
 
@@ -45,6 +46,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
+app.use("/", dsmAuthRouter);
 
 app.listen(app.get("port"), () => {
   console.log("server on ", app.get("port"));
