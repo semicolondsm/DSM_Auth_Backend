@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
-import { SequelizeAttributes } from "../defaultInterface/sequelize.attributes";
+import { SequelizeAttributes } from "../defaultInterfaceAttributes/sequelize.attributes";
 import { UserAttributes } from "./attributes";
-import { UserInterface } from "../defaultInterface/model.interfaces";
+import { UserInterface } from "../defaultInterfaceAttributes/model.interfaces";
 
 export const UserFactory = (sequelize: Sequelize.Sequelize): Sequelize.ModelCtor<UserInterface> => {
   const attributes: SequelizeAttributes<UserAttributes> = {
@@ -13,8 +13,12 @@ export const UserFactory = (sequelize: Sequelize.Sequelize): Sequelize.ModelCtor
       type: Sequelize.STRING(40),
       allowNull: false,
     }, 
+    password: {
+      type: Sequelize.STRING(200),
+      allowNull: false,
+    },
     email: {
-      type: Sequelize.STRING(30),
+      type: Sequelize.STRING(50),
       allowNull: false,
     }, 
     gcn: {

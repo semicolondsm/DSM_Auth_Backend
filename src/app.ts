@@ -8,10 +8,9 @@ import session from "express-session";
 import cors from "cors";
 
 import { Request, Response, NextFunction } from "express";
-import { createModels } from "./models";
+import { db } from "./models";
 
 dotenv.config({ path: path.join(__dirname, ".env")});
-const db = createModels();
 
 const app: express.Application = express();
 
