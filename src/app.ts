@@ -26,8 +26,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const allowOrigins: string[] = [process.env.ALLOW_ORIGINS1 as string];
-  const origin: string = req.headers.origin as string;
+  const allowOrigins: string[] = [process.env.ALLOW_ORIGINS1!];
+  const origin: string = req.headers.origin!;
   if(allowOrigins.includes(origin)) {
     return cors({
       origin,
@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
-  secret: process.env.COOKIE_SECRET as string,
+  secret: process.env.COOKIE_SECRET!,
   resave: false,
   saveUninitialized: false,
 }));
