@@ -8,8 +8,8 @@ import session from "express-session";
 import cors from "cors";
 
 import { Request, Response, NextFunction } from "express";
-import { db } from "./models";
-import dsmAuthRouter from "./routes";
+import { db } from "./models/index";
+import dsmAuthRouter from "./routes/index";
 
 dotenv.config({ path: path.join(__dirname, ".env")});
 
