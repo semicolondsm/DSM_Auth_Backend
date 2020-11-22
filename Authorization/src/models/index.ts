@@ -9,6 +9,8 @@ const createModels = (): DbInterface => {
     User: UserFactory(sequelize),
     Consumer: ConsumerFactory(sequelize),
   }
+  db.User.hasMany(db.Consumer, { foreignKey: "UserId", sourceKey: "id" });
+  db.Consumer.belongsTo(db.User, { foreignKey: "UserId", targetKey: "id" });
   return db;
 }
 
