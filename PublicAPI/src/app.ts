@@ -6,10 +6,15 @@ import * as dotenv from "dotenv";
 
 import { Request, Response, NextFunction } from "express";
 import dsmAPIRouter from "./routes/index";
+import { db } from "./models/index";
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app: express.Application = express();
+
+db.sequelize.sync({ force: false })
+  .then(() => console.log("DATABASE CONNECTION"))
+  .catch(console.error);
 
 app.set("port", process.env.PORT || "8090");
 
