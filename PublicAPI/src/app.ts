@@ -17,7 +17,10 @@ app.use(morgan<Request, Response>("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/", dsmAPIRouter);
+app.use("/v1", dsmAPIRouter);
+app.use((req: Request, res: Response) => {
+  res.end();
+});
 
 app.listen(app.get("port"), () => {
   console.log("server on ", app.get("port"));
