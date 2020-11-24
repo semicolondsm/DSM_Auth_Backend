@@ -1,8 +1,9 @@
 import express from "express";
 import path from "path";
 import bodyParser from "body-parser";
-import morgan from "morgan";
 import * as dotenv from "dotenv";
+import morgan from "morgan";
+const cors = require("cors");
 
 import { Request, Response, NextFunction } from "express";
 import dsmAPIRouter from "./routes/index";
@@ -10,7 +11,7 @@ import { db } from "./models/index";
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 
-const app: express.Application = express();
+const app = express();
 
 db.sequelize.sync({ force: false })
   .then(() => console.log("DATABASE CONNECTION"))
@@ -18,9 +19,12 @@ db.sequelize.sync({ force: false })
 
 app.set("port", process.env.PORT || "8090");
 
-app.use(morgan<Request, Response>("dev"));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use((req: Request, res: Response, next: NextFunction) => {
+  morgan("dev")(req, res, next);
+});
 
 app.use("/v1", dsmAPIRouter);
 app.use((req: Request, res: Response) => {
