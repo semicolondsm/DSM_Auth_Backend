@@ -19,12 +19,12 @@ db.sequelize.sync({ force: false })
 
 app.set("port", process.env.PORT || "8090");
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use((req: Request, res: Response, next: NextFunction) => {
   morgan("dev")(req, res, next);
 });
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/v1", dsmAPIRouter);
 app.use((req: Request, res: Response) => {
