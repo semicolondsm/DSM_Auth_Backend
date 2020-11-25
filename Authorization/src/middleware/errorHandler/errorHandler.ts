@@ -1,12 +1,9 @@
-import { Response } from "express";
-import { VerifyTokenRequest } from "../verifyToken/verifyToken.interface";
+import { CustomRequest, CustomResponse, BusinessLogic, NextFunction } from "../businessLogicInterface";
 
-type RoutingLogic = (req: VerifyTokenRequest, res: Response) => void;
-
-const errorHandler = (myFunc: RoutingLogic): RoutingLogic => {
-  return async (req: VerifyTokenRequest, res: Response) => {
+const errorHandler = (myFunc: BusinessLogic): BusinessLogic => {
+  return async (req: CustomRequest, res: CustomResponse, next: NextFunction) => {
     try {
-      await myFunc(req, res);
+      await myFunc(req, res, next);
     } catch(err) {
       console.log(err);
       res.status(err.status || 500).json({
@@ -17,6 +14,4 @@ const errorHandler = (myFunc: RoutingLogic): RoutingLogic => {
   }
 }
 
-export {
-  errorHandler
-}
+export { errorHandler }

@@ -1,9 +1,8 @@
 import jwt from "jsonwebtoken";
 
-import { Response, NextFunction } from "express";
-import { VerifyTokenRequest } from "./verifyToken.interface";
+import { BusinessLogic } from "./businessLogicInterface";
 
-const verifyToken = (req: VerifyTokenRequest, res: Response, next: NextFunction) => {
+const verifyToken: BusinessLogic = (req, res, next) => {
   try {
     const token: any = req.headers["access-token"];
     if(!token) {

@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import path from "path";
 import { Options } from "sequelize";
 
-dotenv.config({ path: path.join(__dirname, "../.env") });
+dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 interface DatabaseConfigList {
   [env: string]: Options;
