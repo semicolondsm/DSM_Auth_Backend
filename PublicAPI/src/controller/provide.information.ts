@@ -1,11 +1,8 @@
-import { Response } from "express";
 import { db } from "../models/index";
-import { VerifyTokenRequest } from "../middleware/verifyToken/verifyToken.interface";
+import { BusinessLogic } from "../middleware/businessLogicInterface";
 import { HttpError } from "../middleware/errorHandler/customError";
 
-type RoutingLogic = (req: VerifyTokenRequest, res: Response) => void;
-
-const provideBasicInfo: RoutingLogic = async (req, res) => {
+const provideBasicInfo: BusinessLogic = async (req, res) => {
   const userIdentity = req.decoded["user_identity"];
   const user = await db.User.findOne({
     where: { identity: userIdentity }
