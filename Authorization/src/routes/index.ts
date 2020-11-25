@@ -1,9 +1,13 @@
-import express, { Request, Response, NextFunction } from "express";
+import express from "express";
+
+import userRegistrationRouter from "./userRegistration";
+import consumerRouter from "./consumer";
+import authenticationRouter from "./authentication";
 
 const router: express.Router = express.Router();
 
-router.use("/", (req: Request, res: Response, next: NextFunction) => {
-  res.send("dsm_auth api server");
-});
+router.use("/auth", userRegistrationRouter);
+router.use("/consumer", consumerRouter);
+router.use("/dsmauth", authenticationRouter);
 
 export default router;

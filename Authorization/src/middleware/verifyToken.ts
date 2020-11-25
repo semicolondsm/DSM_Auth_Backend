@@ -1,9 +1,8 @@
 import jwt from "jsonwebtoken";
 
-import { Response, NextFunction } from "express";
-import { VerifyTokenRequest } from "./verifyToken.interface";
+import { BusinessLogic } from "./businessLogicInterface";
 
-const verifyToken = (req: VerifyTokenRequest, res: Response, next: NextFunction) => {
+const verifyToken: BusinessLogic = (req, res, next) => {
   try {
     const token: any = req.headers["access-token"];
     if(!token) {
@@ -15,7 +14,7 @@ const verifyToken = (req: VerifyTokenRequest, res: Response, next: NextFunction)
     req.decoded = jwt.verify(token, process.env.JWT_SECRET!);
     next();
   } catch(err) {
-    //console.error(err);
+    console.error(err);
     if(err.name === "TokenExpiredError") {
       return res.status(401).json({
         code: 419,
