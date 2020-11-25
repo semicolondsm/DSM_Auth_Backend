@@ -15,7 +15,7 @@ const verifyToken = (req: VerifyTokenRequest, res: Response, next: NextFunction)
     req.decoded = jwt.verify(token, process.env.JWT_SECRET!);
     next();
   } catch(err) {
-    //console.error(err);
+    console.error(err);
     if(err.name === "TokenExpiredError") {
       return res.status(401).json({
         code: 419,
