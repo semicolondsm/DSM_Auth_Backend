@@ -1,9 +1,12 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Router } from "express";
+import { verifyToken } from "../middleware/verifyToken/verifyToken";
+import { provideInfo } from "../controller/provide.information";
+import { errorHandler } from "../middleware/errorHandler/errorHandler";
 
 const router: Router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-  res.send("dsmAPI server");
-});
+const provideBasicInfoRouter = errorHandler(provideInfo.provideBasicInfo);
+
+router.get("/info/basic", verifyToken, provideBasicInfoRouter);
 
 export default router;
