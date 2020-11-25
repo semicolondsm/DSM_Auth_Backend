@@ -9,7 +9,7 @@ import cors from "cors";
 
 import { Request, Response, NextFunction } from "express";
 import { db } from "./models/index";
-import dsmAuthRouter from "./routes/index";
+import dsmAuthRouter from "./routes";
 
 dotenv.config({ path: path.join(__dirname, "../.env")});
 
