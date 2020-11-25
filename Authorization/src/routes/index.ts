@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express from "express";
 
 import userRegistrationRouter from "./userRegistration";
 import consumerRouter from "./consumer";
