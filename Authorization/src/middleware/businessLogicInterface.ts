@@ -9,7 +9,7 @@ interface CustomResponse extends Response {
 }
 
 interface BusinessLogic {
-  (req: CustomRequest, res: CustomResponse, next: NextFunction): void; 
+  (req: CustomRequest, res: CustomResponse, next: NextFunction): any; 
 }
 
 export { 
