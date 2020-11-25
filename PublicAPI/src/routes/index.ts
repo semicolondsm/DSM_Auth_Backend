@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyToken } from "../middleware/verifyToken/verifyToken";
+import { verifyToken } from "../middleware/verifyToken";
 import { provideInfo } from "../controller/provide.information";
 import { errorHandler } from "../middleware/errorHandler/errorHandler";
 
