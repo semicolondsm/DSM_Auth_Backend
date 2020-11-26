@@ -2,6 +2,7 @@ import { BusinessLogic } from "../middleware/businessLogicInterface";
 import { HttpError } from "../middleware/errorHandler/customError";
 import { db } from "../models/index";
 import { sendMail } from "./sendMail";
+import { redisClient } from "../app";
 
 const checkOverlapId: BusinessLogic = async (req, res) => {
   const { id } = req.body;
@@ -28,7 +29,10 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
     throw new HttpError(404, "Not Found Email");
   }
   const authNum: string = Math.floor(Math.random() * 1000000).toString();
-  req.session[email] = authNum;
+  redisClient.set(email, authNum, "EX", 60, (err: Error | null) => {
+    if(err) console.error(err);
+    else console.log("save for redis: ", email);
+  });
   sendMail(email, authNum)
   .then(console.log)
   .catch(console.error);

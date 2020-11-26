@@ -5,7 +5,7 @@ import path from "path";
 dotenv.config({ path: path.join(__dirname, "../../.env")});
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'gmail', // dsm auth 이메일 필요 
   auth: { 
     user: process.env.GMAIL_USER, 
     pass: process.env.GMAIL_PASSWORD 
@@ -19,11 +19,11 @@ const sendMail = (userMail: string, authNum: string): Promise<object> => {
       to: userMail,
       subject: "test email",
       html: `
-      <div style="background: red">asdf</div>
+      <div style="background: red">asdf</div> 
       <h1>Hello</h1>
       <h1>${userMail}</h1>
       <h2>${authNum}</h2>
-      `,  
+      `,  // html 퍼블리싱 필요 
     }, (err, res) => {
       if(err) reject(err);
       else resolve(res);
