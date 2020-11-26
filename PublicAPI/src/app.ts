@@ -9,7 +9,7 @@ import { Request, Response, NextFunction } from "express";
 import dsmAPIRouter from "./routes/index";
 import { db } from "./models/index";
 
-dotenv.config({ path: path.join(__dirname, ".env") });
+dotenv.config({ path: path.join(__dirname, "../.env") });
 
 const app = express();
 
