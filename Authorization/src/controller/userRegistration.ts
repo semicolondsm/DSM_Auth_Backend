@@ -2,7 +2,7 @@ import { BusinessLogic } from "../middleware/businessLogicInterface";
 import { HttpError } from "../middleware/errorHandler/customError";
 import { db } from "../models/index";
 import { sendMail } from "./sendMail";
-import { redisClient } from "../app";
+import redisClient from "../redisClient";
 
 const checkOverlapId: BusinessLogic = async (req, res) => {
   const { id } = req.body;
@@ -41,7 +41,7 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
   });
 }
 
-export const userSignUpController = {
+export {
   checkOverlapId,
   emailAuthentication,
 }

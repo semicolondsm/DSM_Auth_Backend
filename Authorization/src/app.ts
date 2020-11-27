@@ -6,18 +6,15 @@ import morgan from "morgan";
 import * as dotenv from "dotenv";
 import session from "express-session";
 import cors from "cors";
-import redis from "redis";
 import connect_redis from "connect-redis";
+import redisClient from "./redisClient";
 
 import { Request, Response, NextFunction } from "express";
 import { db } from "./models/index";
 import dsmAuthRouter from "./routes";
 
 dotenv.config({ path: path.join(__dirname, "../.env")});
-const redisClient = redis.createClient({
-  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
-  password: process.env.REDIS_PASSWORD,
-});
+
 const RedisStore = connect_redis(session);
 
 const app: express.Application = express();
@@ -60,5 +57,3 @@ app.use("/", dsmAuthRouter);
 app.listen(app.get("port"), () => {
   console.log("server on ", app.get("port"));
 });
-
-export { redisClient }
