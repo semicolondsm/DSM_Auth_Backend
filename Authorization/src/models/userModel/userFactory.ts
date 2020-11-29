@@ -11,11 +11,11 @@ export const UserFactory = (sequelize: Sequelize.Sequelize): Sequelize.ModelCtor
     }, 
     identity: {
       type: Sequelize.STRING(40),
-      allowNull: false,
+      allowNull: true,
     }, 
     password: {
       type: Sequelize.STRING(200),
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: Sequelize.STRING(50),
