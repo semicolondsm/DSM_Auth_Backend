@@ -17,7 +17,7 @@ const sendMail = (userMail: string, authNum: string): Promise<object> => {
     transporter.sendMail({
       from: process.env.GMAIL_USER,
       to: userMail,
-      subject: "test email",
+      subject: `DSM_Auth 이메일 승인코드 to ${userMail}`,
       html: `
       <!DOCTYPE html>
 <html lang="en">
