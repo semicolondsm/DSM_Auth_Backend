@@ -29,7 +29,7 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
     throw new HttpError(404, "Not Found Email");
   }
   const authNum: string = Math.floor(Math.random() * 1000000).toString();
-  redisClient.set(email, authNum, "EX", 60, (err: Error | null) => {
+  redisClient.set(email, authNum, "EX", 60 * 5, (err: Error | null) => {
     if(err) console.error(err);
     else console.log("save for redis: ", email);
   });
