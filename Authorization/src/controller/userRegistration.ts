@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { BusinessLogic } from "../middleware/businessLogicInterface";
 import { HttpError } from "../middleware/errorHandler/customError";
 import { db } from "../models/index";
@@ -50,7 +51,7 @@ const userSignup: BusinessLogic = async (req, res) => {
     if(data !== authcode) {
       throw new HttpError(401, "Unauthorized code");
     }
-    const exUser = await db.User.findOne({ where: { name }}); 
+    const exUser = await db.User.findOne({ where: { [Op.and]: [{ name }, { email }] }}); 
     if(exUser && exUser.email === email) {
       db.User.update({
         identity: id,
