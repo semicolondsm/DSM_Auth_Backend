@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/semicolonDSM/DSM_Auth_Backend#readme",
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/bluebird": "^3.5.33",
     "@types/body-parser": "^1.19.0",
     "@types/connect-redis": "0.0.15",
@@ -31,6 +32,7 @@
     "@types/nodemailer": "^6.4.0",
     "@types/redis": "^2.8.28",
     "@types/validator": "^13.1.0",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "connect-redis": "^5.0.0",
     "cookie-parser": "^1.4.5",
