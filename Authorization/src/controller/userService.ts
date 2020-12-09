@@ -4,6 +4,7 @@ import { HttpError } from "../middleware/errorHandler/customError";
 import { db } from "../models/index";
 import { sendMail } from "./sendMail";
 import redisClient from "../redisClient";
+import bcrypt from "bcrypt";
 
 const checkOverlapId: BusinessLogic = async (req, res) => {
   const { id } = req.body;
@@ -53,11 +54,11 @@ const userSignup: BusinessLogic = async (req, res) => {
     }
     const exUser = await db.User.findOne({ where: { [Op.and]: [{ name }, { email }] }}); 
     if(exUser && exUser.email === email) {
-      db.User.update({
+      const hash = await bcrypt.hash(password, 12);
+      await db.User.update({
         identity: id,
-        password: password,
-      }, { where: { email: email } })
-      .then(() => console.log("User SingUp ", exUser.name));
+        password: hash,
+      }, { where: { email: email } });
       res.status(200).json({
         message: "signup successfully",
       });

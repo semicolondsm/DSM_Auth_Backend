@@ -1,5 +1,5 @@
 import express from "express";
-import * as userRegistration from "../controller/userRegistration";
+import * as userRegistration from "../controller/userService";
 import { errorHandler } from "../middleware/errorHandler/errorHandler";
 
 const router: express.Router = express.Router();

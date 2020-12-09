@@ -4,4 +4,5 @@ export interface ConsumerAttributes {
   redirect_url: string;
   client_id: string;
   client_secret: string;
+  UserId: number;
 }
