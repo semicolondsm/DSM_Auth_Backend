@@ -15,7 +15,7 @@ import dsmAuthRouter from "./routes";
 
 dotenv.config({ path: path.join(__dirname, "../.env")});
 
-const RedisStore = connect_redis(session);
+const RedisStore: connect_redis.RedisStore = connect_redis(session);
 
 const app: express.Application = express();
 
