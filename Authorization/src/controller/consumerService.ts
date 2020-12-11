@@ -1,7 +1,7 @@
 import { BusinessLogic } from "../middleware/businessLogicInterface";
 import { v4 } from "uuid";
 import { db } from "../models/index";
-import { UserInterface } from "../models/defaultInterfaceAttributes/model.interfaces";
+import { ConsumerInterface, UserInterface } from "../models/defaultInterfaceAttributes/model.interfaces";
 import { HttpError } from "../middleware/errorHandler/customError";
 
 const consumerRegstration: BusinessLogic = async (req, res, next) => {
@@ -31,6 +31,14 @@ const consumerRegstration: BusinessLogic = async (req, res, next) => {
   });
 }
 
+const provideConsumerList: BusinessLogic = async (req, res, next) => {
+  const consumers: ConsumerInterface[] | null = await db.Consumer.findAll({
+    attributes: ["name", "domain_url"],
+  });
+  res.status(200).json(consumers);
+}
+
 export {
   consumerRegstration,
+  provideConsumerList
 }
