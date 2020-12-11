@@ -8,6 +8,6 @@ const router: express.Router = express.Router();
 
 const consumerRegistrationRouter: BusinessLogic = errorHandler(consumerService.consumerRegstration);
 
-router.post("registration", verifyToken, consumerRegistrationRouter);
+router.post("/registration", verifyToken, consumerRegistrationRouter);
 
 export default router;
