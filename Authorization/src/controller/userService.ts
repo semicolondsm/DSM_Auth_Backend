@@ -3,11 +3,8 @@ import { BusinessLogic } from "../middleware/businessLogicInterface";
 import { HttpError } from "../middleware/errorHandler/customError";
 import { db } from "../models/index";
 import { sendMail } from "./sendMail";
-import redisClient from "../redisClient";
+import redisClient, { asyncRedistGet } from "../redisClient";
 import bcrypt from "bcrypt";
-import { promisify } from "util";
-
-const asyncRedistGet: (email: string) => Promise<string | null> = promisify(redisClient.get).bind(redisClient);
 
 const checkOverlapId: BusinessLogic = async (req, res) => {
   const { id } = req.body;
