@@ -10,7 +10,7 @@ const redisClient: redis.RedisClient = redis.createClient({
   password: process.env.REDIS_PASSWORD,
 });
 
-const asyncRedistGet: (email: string) => Promise<string | null> = promisify(redisClient.get).bind(redisClient);
+const asyncRedistGet: (arg1: string) => Promise<string | null> = promisify(redisClient.get).bind(redisClient);
 
 export default redisClient;
 export { asyncRedistGet };

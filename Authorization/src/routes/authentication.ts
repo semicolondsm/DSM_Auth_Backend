@@ -1,5 +1,5 @@
 import express from "express";
-import * as dsmAuthentication from "../controller/authentication";;
+import * as dsmAuthentication from "../controller/dsmAuthentication";;
 import { errorHandler } from "../middleware/errorHandler/errorHandler";
 import { BusinessLogic } from "../middleware/businessLogicInterface";
 

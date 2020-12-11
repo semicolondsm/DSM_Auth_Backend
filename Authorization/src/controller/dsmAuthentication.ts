@@ -3,7 +3,8 @@ import { db } from "../models/index";
 import { UserInterface, ConsumerInterface } from "../models/defaultInterfaceAttributes/model.interfaces";
 import { HttpError } from "../middleware/errorHandler/customError";
 import bcrypt from "bcrypt";
-import redisClient from "../redisClient";
+import redisClient, { asyncRedistGet } from "../redisClient";
+import jwt from "jsonwebtoken";
 
 const dsmLogin: BusinessLogic = async (req, res, next) => {
 
@@ -32,6 +33,26 @@ const dsmLogin: BusinessLogic = async (req, res, next) => {
   res.status(200).json({
     location: `${redirect_url}?code=${code}`,
   });
+}
+
+const provideAccessToken: BusinessLogic = async (req, res, next) => {
+  const { client_id, client_secret, code } = req.body;
+  const consumer: ConsumerInterface | null = await db.Consumer.findOne({
+    where: { client_id: client_id },
+  });
+  // client_id authentication
+  if(!consumer) {
+    throw new HttpError(400, "Bad Request");
+  } 
+  // client_secret authtication 
+  if(consumer.client_secret !== client_secret) {
+    throw new HttpError(401, "Unauthorized Secret Key");
+  }
+  // query string code authentication
+  const codeData: string | null = await asyncRedistGet(client_id); 
+  if(codeData && codeData === code) {
+    
+  }
 }
 
 export {
