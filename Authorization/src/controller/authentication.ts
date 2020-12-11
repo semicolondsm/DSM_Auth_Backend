@@ -26,11 +26,11 @@ const dsmLogin: BusinessLogic = async (req, res, next) => {
   if(!exConsumer || exConsumer.redirect_url !== redirect_url) {
     throw new HttpError(400, "Bad Request");
   } 
-  const authcode: string = (Math.random() * 1000000).toString();
-  redisClient.set(client_id, authcode);
+  const code: string = (Math.random() * 1000000).toString();
+  redisClient.set(client_id, code);
 
   res.status(200).json({
-    location: `${redirect_url}?authcode=${authcode}`,
+    location: `${redirect_url}?code=${code}`,
   });
 }
 
