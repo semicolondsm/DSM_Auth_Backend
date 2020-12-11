@@ -1,8 +1,10 @@
+import { Op } from "sequelize";
 import { BusinessLogic } from "../middleware/businessLogicInterface";
 import { HttpError } from "../middleware/errorHandler/customError";
 import { db } from "../models/index";
 import { sendMail } from "./sendMail";
 import redisClient from "../redisClient";
+import bcrypt from "bcrypt";
 
 const checkOverlapId: BusinessLogic = async (req, res) => {
   const { id } = req.body;
@@ -29,7 +31,7 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
     throw new HttpError(404, "Not Found Email");
   }
   const authNum: string = Math.floor(Math.random() * 1000000).toString();
-  redisClient.set(email, authNum, "EX", 60, (err: Error | null) => {
+  redisClient.set(email, authNum, "EX", 60 * 5, (err: Error | null) => {
     if(err) console.error(err);
     else console.log("save for redis: ", email);
   });
@@ -41,7 +43,33 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
   });
 }
 
+const userSignup: BusinessLogic = async (req, res) => {
+  const { id, password, name, email, authcode } = req.body;
+  redisClient.get(email, async (err: Error | null, data: string | null) => {
+    if(err) {
+      throw new HttpError(400, "Bad Request");
+    }
+    if(data !== authcode) {
+      throw new HttpError(401, "Unauthorized code");
+    }
+    const exUser = await db.User.findOne({ where: { [Op.and]: [{ name }, { email }] }}); 
+    if(exUser && exUser.email === email) {
+      const hash = await bcrypt.hash(password, 12);
+      await db.User.update({
+        identity: id,
+        password: hash,
+      }, { where: { email: email } });
+      res.status(200).json({
+        message: "signup successfully",
+      });
+    } else {
+      throw new HttpError(404, "Not Found Email");
+    }
+  });
+}
+
 export {
   checkOverlapId,
   emailAuthentication,
+  userSignup
 }
