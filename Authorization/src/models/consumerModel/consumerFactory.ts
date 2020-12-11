@@ -24,6 +24,10 @@ export const ConsumerFactory = (sequelize: Sequelize.Sequelize): Sequelize.Model
     client_secret: {
       type: Sequelize.STRING(150),
       allowNull: false,
+    },
+    UserId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
     }
   };
 
