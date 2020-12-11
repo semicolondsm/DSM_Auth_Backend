@@ -12,7 +12,7 @@ const dsmLogin: BusinessLogic = async (req, res, next) => {
   const promise_exConsumer: Promise<ConsumerInterface | null> = db.Consumer.findOne({ where: { client_id } });
 
   // user authentication 
-  const exUser: UserInterface | null = await promise_exUser;
+  const exUser: UserInterface | null = await promise_exUser; // nullable 
   if(!exUser) {
     throw new HttpError(401, "Unauthorized id");
   } 
@@ -22,7 +22,7 @@ const dsmLogin: BusinessLogic = async (req, res, next) => {
   }
   
   // consumer authenticaion
-  const exConsumer: ConsumerInterface | null = await promise_exConsumer;
+  const exConsumer: ConsumerInterface | null = await promise_exConsumer; // nullable
   if(!exConsumer || exConsumer.redirect_url !== redirect_url) {
     throw new HttpError(400, "Bad Request");
   } 
