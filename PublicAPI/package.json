@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.ts",
   "scripts": {
-    "start": "tsc & npx nodemon --exec node dist/app",
+    "start": "nodemon --exec ts-node src/app.ts",
+    "start:prod": "tsc & npx nodemon --exec node dist/app",
     "test": "tsc & npx mocha dist/test/**/*.js"
   },
   "author": "jeonjiwoo0522",

@@ -7,7 +7,9 @@ import * as consumerService from "../controller/consumerService";
 const router: express.Router = express.Router();
 
 const consumerRegistrationRouter: BusinessLogic = errorHandler(consumerService.consumerRegstration);
+const provideConsumerListRouter: BusinessLogic = errorHandler(consumerService.provideConsumerList);
 
-router.post("registration", verifyToken, consumerRegistrationRouter);
+router.post("/registration", verifyToken, consumerRegistrationRouter);
+router.get("/list", provideConsumerListRouter);
 
 export default router;
