@@ -24,10 +24,6 @@ export const UserFactory = (sequelize: Sequelize.Sequelize): Sequelize.ModelCtor
     gcn: {
       type: Sequelize.STRING(5),
       allowNull: false,
-    }, 
-    refresh_token: {
-      type: Sequelize.STRING(400),
-      allowNull: true,
     }
   }
   const User = sequelize.define<UserInterface, UserAttributes>("users", attributes);
