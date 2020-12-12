@@ -11,11 +11,11 @@ export const UserFactory = (sequelize: Sequelize.Sequelize): Sequelize.ModelCtor
     }, 
     identity: {
       type: Sequelize.STRING(40),
-      allowNull: false,
+      allowNull: true,
     }, 
     password: {
       type: Sequelize.STRING(200),
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: Sequelize.STRING(50),
@@ -24,10 +24,6 @@ export const UserFactory = (sequelize: Sequelize.Sequelize): Sequelize.ModelCtor
     gcn: {
       type: Sequelize.STRING(5),
       allowNull: false,
-    }, 
-    refresh_token: {
-      type: Sequelize.STRING(400),
-      allowNull: true,
     }
   }
   const User = sequelize.define<UserInterface, UserAttributes>("users", attributes);
