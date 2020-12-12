@@ -7,7 +7,7 @@ const errorHandler = (myFunc: BusinessLogic): BusinessLogic => {
     } catch(err) {
       console.log(err);
       res.status(err.status || 500).json({
-        code: err.status || 500,
+        code:  err.responseMessage || err.status || 500,
         message: err.message || "Interval Server Error",
       });
     }
