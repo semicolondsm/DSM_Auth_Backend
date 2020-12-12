@@ -2,7 +2,7 @@ import { Op } from "sequelize";
 import { BusinessLogic } from "../middleware/businessLogicInterface";
 import { HttpError } from "../middleware/errorHandler/customError";
 import { db } from "../models/index";
-import { sendMail } from "./sendMail";
+import { sendMail } from "./functions/sendMail";
 import redisClient, { asyncRedistGet } from "../redisClient";
 import bcrypt from "bcrypt";
 
