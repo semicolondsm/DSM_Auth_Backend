@@ -35,7 +35,7 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
     if(err) console.error(err);
     else console.log("save for redis: ", email);
   });
-  sendMail(email, authNum)
+  sendMail(email, authNum) 
   .then(console.log)
   .catch(console.error);
   res.status(200).json({
@@ -46,7 +46,7 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
 const userSignup: BusinessLogic = async (req, res) => {
   const { id, password, name, email, authcode } = req.body;
   const data = await asyncRedistGet(email);
-  if(data) {
+  if(!data) {
     throw new HttpError(400, "Bad Request");
   }
   if(data !== authcode) {

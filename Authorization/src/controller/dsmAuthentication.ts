@@ -4,7 +4,8 @@ import { UserInterface, ConsumerInterface } from "../models/defaultInterfaceAttr
 import { HttpError } from "../middleware/errorHandler/customError";
 import bcrypt from "bcrypt";
 import redisClient, { asyncRedistGet } from "../redisClient";
-import jwt from "jsonwebtoken";
+import { v4 } from "uuid";
+import * as issuanceToken from "./functions/issuanceToken";
 
 const dsmLogin: BusinessLogic = async (req, res, next) => {
 
@@ -27,15 +28,16 @@ const dsmLogin: BusinessLogic = async (req, res, next) => {
   if(!exConsumer || exConsumer.redirect_url !== redirect_url) {
     throw new HttpError(400, "Bad Request");
   } 
-  const code: string = (Math.random() * 1000000).toString();
+  const code: string = v4();
   redisClient.set(client_id, code);
+  redisClient.set(code, exUser.identity!);
 
   res.status(200).json({
     location: `${redirect_url}?code=${code}`,
   });
 }
 
-const provideAccessToken: BusinessLogic = async (req, res, next) => {
+const provideToken: BusinessLogic = async (req, res, next) => {
   const { client_id, client_secret, code } = req.body;
   const consumer: ConsumerInterface | null = await db.Consumer.findOne({
     where: { client_id: client_id },
@@ -49,12 +51,21 @@ const provideAccessToken: BusinessLogic = async (req, res, next) => {
     throw new HttpError(401, "Unauthorized Secret Key");
   }
   // query string code authentication
-  const codeData: string | null = await asyncRedistGet(client_id); 
+  const codeData: string | null = await asyncRedistGet(client_id); // nullable 
   if(codeData && codeData === code) {
-    
+    const user_identity: string = await asyncRedistGet(codeData) as string;
+    const accessToken: string = await issuanceToken.access(user_identity, client_id);
+    const refreshToken: string = await issuanceToken.refresh(user_identity, client_id);
+    res.status(200).json({
+      "access-token": accessToken,
+      "refresh-token": refreshToken,
+    });
+  } else {
+    throw new HttpError(403, "Forbidden Code");
   }
 }
 
 export {
   dsmLogin,
+  provideToken,
 }
