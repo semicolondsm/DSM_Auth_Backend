@@ -1,6 +1,6 @@
 import express from "express";
 
-import userRegistrationRouter from "./userService";
+import userRegistrationRouter from "./userRegistrationService";
 import consumerRouter from "./consumerService";
 import authenticationRouter from "./authentication";
 
