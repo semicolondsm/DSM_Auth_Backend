@@ -30,7 +30,7 @@ const dsmLogin: BusinessLogic = async (req, res, next) => {
   } 
   const code: string = v4();
   redisClient.set(client_id, code);
-  redisClient.set(code, exUser.identity!);
+  redisClient.set(code, exUser.identity!, "EX", (60*60*24*14+200));
 
   res.status(200).json({
     location: `${redirect_url}?code=${code}`,
