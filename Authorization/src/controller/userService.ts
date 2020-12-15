@@ -67,8 +67,19 @@ const userSignup: BusinessLogic = async (req, res) => {
   }
 }
 
+const userServices: BusinessLogic = async (req, res, next) => {
+  const userServices: any = await db.User.findOne({
+    where: { identity: req.decoded.user_identity },
+    include: {
+      model: db.Consumer,
+    }
+  });
+  res.json(userServices.consumers);
+}
+
 export {
   checkOverlapId,
   emailAuthentication,
-  userSignup
+  userSignup,
+  userServices
 }
