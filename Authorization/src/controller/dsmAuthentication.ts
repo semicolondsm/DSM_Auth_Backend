@@ -65,7 +65,20 @@ const provideToken: BusinessLogic = async (req, res, next) => {
   }
 }
 
+const refreshToken: BusinessLogic = async (req, res, next) => {
+  const { user_identity, client_id } = req.rt_decoded;
+  const exConsumer: ConsumerInterface | null = await db.Consumer.findOne({ where: { client_id } });
+  if(!exConsumer) {
+    throw new HttpError(403, "Forbidden Consumer");
+  }
+  const accessToken: string = await issuanceToken.access(user_identity, client_id);
+  res.status(200).json({
+    "access-token": accessToken,
+  });
+}
+
 export {
   dsmLogin,
   provideToken,
+  refreshToken
 }
