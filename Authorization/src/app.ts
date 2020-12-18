@@ -30,7 +30,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const allowOrigins: string[] = [process.env.ALLOW_ORIGINS1!];
+  const allowOrigins: string[] = [process.env.ALLOW_ORIGINS1!, process.env.ALLOW_ORIGINS2!];
   const origin: string = req.headers.origin!;
   if(allowOrigins.includes(origin)) {
     return cors({
