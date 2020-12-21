@@ -59,7 +59,7 @@ const userSignup: BusinessLogic = async (req, res) => {
       identity: id,
       password: hash,
     }, { where: { email: email } });
-    res.status(200).json({
+    res.status(201).json({
       message: "signup successfully",
     });
   } else {
