@@ -6,8 +6,9 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon --exec ts-node src/app.ts",
-    "start:prod": "cross-env NODE_ENV=production npx nodemon --exec node dist/app",
-    "test": "tsc & npx mocha dist/test/**/*.spec.js"
+    "start:prod": "cross-env NODE_ENV=production npx pm2 start ./dist/app.js --name authorization",
+    "test": "tsc & npx mocha dist/test/**/*.spec.js",
+    "stop": "npx pm2 stop authorization & npx pm2 delete authorization"
   },
   "repository": {
     "type": "git",
