@@ -30,7 +30,6 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
   if(!existUser) {
     throw new HttpError(404, "Not Found Email");
   }
-  console.log(existUser);
   if(existUser.password != undefined) {
     throw new HttpError(403, "Aleady Signup");
   }
