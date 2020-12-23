@@ -5,14 +5,10 @@ import path from "path";
 dotenv.config({ path: path.join(__dirname, "../../.env")});
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  secure: true,
-  port: 465,  
   service: 'gmail', 
-  tls: {
-    ciphers: 'SSLv3'
-  },
-  requireTLS: true,
+  host: "smtp.gmail.com",
+  port: 465,  
+  secure: true,
   auth: { 
     user: process.env.GMAIL_USER, 
     pass: process.env.GMAIL_PASSWORD 
