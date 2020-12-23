@@ -30,6 +30,10 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
   if(!existUser) {
     throw new HttpError(404, "Not Found Email");
   }
+  console.log(existUser);
+  if(existUser.password != undefined) {
+    throw new HttpError(403, "Aleady Signup");
+  }
   const authNum: string = Math.floor(Math.random() * 1000000).toString();
   redisClient.set(email, authNum, "EX", 60 * 5, (err: Error | null) => {
     if(err) console.error(err);
