@@ -5,7 +5,6 @@ interface UserAttributes {
   password?: string;
   email?: string;
   gcn: string;
-  refresh_token: string;
 }
 
 export {
