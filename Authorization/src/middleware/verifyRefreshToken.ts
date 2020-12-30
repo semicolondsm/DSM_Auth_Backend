@@ -10,6 +10,10 @@ const verifyRefreshTokenLogic: BusinessLogic = (req, res, next) => {
     if(!refreshToken) {
       throw new HttpError(400, "Bad Request", 400);
     }
+    const decoded: object & { type: string } = jwt.verify(refreshToken.slice(7), process.env.JWT_SECRET!) as object & { type: string };
+    if(decoded.type !== "refresh") {
+      throw new Error();
+    }
     req.rt_decoded = jwt.verify(refreshToken.slice(7), process.env.JWT_SECRET!);
     next();
   } catch(err) {
