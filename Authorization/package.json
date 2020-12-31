@@ -8,7 +8,8 @@
     "start": "nodemon --exec ts-node src/app.ts",
     "start:prod": "cross-env NODE_ENV=production npx pm2 start ./dist/app.js --watch --name authorization",
     "test": "tsc & npx mocha dist/test/**/*.spec.js",
-    "stop": "npx pm2 stop authorization & npx pm2 delete authorization"
+    "stop": "npx pm2 stop authorization & npx pm2 delete authorization",
+    "coverage": "nyc --reporter=text npm test"
   },
   "repository": {
     "type": "git",
@@ -62,6 +63,7 @@
     "cross-env": "^7.0.3",
     "mocha": "^8.2.0",
     "nodemon": "^2.0.6",
+    "nyc": "^15.1.0",
     "pm2": "^4.5.1",
     "sinon": "^9.2.1",
     "ts-mocha": "^8.0.0",
