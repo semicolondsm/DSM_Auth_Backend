@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon --exec ts-node src/app.ts",
-    "start:prod": "cross-env NODE_ENV=production npx pm2 start ./dist/app.js --name resource",
+    "start:prod": "cross-env NODE_ENV=production npx pm2 start ./dist/app.js --watch --name resource",
     "test": "tsc & npx mocha dist/test/**/*.js",
     "stop": "npx pm2 stop resource & npx pm2 delete resource"
   },
