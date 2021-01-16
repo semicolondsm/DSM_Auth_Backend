@@ -9,7 +9,8 @@
     "start:prod": "cross-env NODE_ENV=production npx pm2 start ./dist/server.js --watch --name authorization",
     "test": "tsc & npx mocha dist/test/**/*.spec.js",
     "stop": "npx pm2 stop authorization & npx pm2 delete authorization",
-    "coverage": "nyc --reporter=text npm test"
+    "coverage": "nyc --reporter=text npm test",
+    "copyfile": "cp -r ./src/controller/functions/static/ ./dist/controller/functions/static/"
   },
   "repository": {
     "type": "git",
