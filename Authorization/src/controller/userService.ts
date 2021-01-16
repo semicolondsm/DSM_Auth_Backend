@@ -42,7 +42,7 @@ const emailAuthentication: BusinessLogic = async (req, res) => {
   .then(console.log)
   .catch(console.error);
   res.status(200).json({
-    message: authNum,
+    message: "success",
   });
 }
 
