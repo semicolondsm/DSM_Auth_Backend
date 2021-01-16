@@ -37,7 +37,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
-
 app.use("/", dsmAuthRouter);
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(404).send("sorry, cannot found");
+});
 
 export default app;

@@ -28,8 +28,8 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/v1", dsmAPIRouter);
-app.use((req: Request, res: Response) => {
-  res.end();
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(404).send("sorry, cannot found");
 });
 
 app.listen(app.get("port"), () => {
