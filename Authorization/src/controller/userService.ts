@@ -57,6 +57,9 @@ const userSignup: BusinessLogic = async (req, res) => {
   }
   const exUser = await db.User.findOne({ where: { [Op.and]: [{ name }, { email }] }}); 
   if(exUser && exUser.email === email) {
+    if(exUser.password) {
+      throw new HttpError(403, "Aleady Signup");
+    }
     const hash = await bcrypt.hash(password, 12);
     await db.User.update({
       identity: id,
