@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  dsmauth:
+    image: node:dsmauth
+    build: ./Authorization
+    ports:
+      - "3001:8080"
+    container_name: dsmauth
+  dsmapi:
+    image: node:dsmapi
+    build: ./PublicAPI
+    ports: 
+      - "3003:8090"
+    container_name: dsmapi
