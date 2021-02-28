@@ -5,10 +5,11 @@ WORKDIR /root
 COPY . .
 
 RUN npm install 
+RUN npm audit fix
 RUN npx tsc 
 
 ENV NODE_ENV production
 
-EXPOSE 3000
+EXPOSE 8090
 
 CMD ["node", "./dist/app.js"]
