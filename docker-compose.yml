@@ -11,5 +11,5 @@ services:
     image: node:dsmapi
     build: ./PublicAPI
     ports: 
-      - "3003:8090"
+      - "8443:8090"
     container_name: dsmapi
