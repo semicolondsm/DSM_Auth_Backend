@@ -4,9 +4,8 @@ WORKDIR /root
 
 COPY . .
 
-RUN npm install \
-    npx tsc \
-    npm run copyfile
+RUN npm install 
+RUN npx tsc 
 
 ENV NODE_ENV production
 
