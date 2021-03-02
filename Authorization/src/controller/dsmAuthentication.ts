@@ -8,7 +8,6 @@ import { v4 } from "uuid";
 import * as issuanceToken from "./functions/issuanceToken";
 
 const dsmLogin: BusinessLogic = async (req, res, next) => {
-
   const { id, password, redirect_url, client_id } = req.body;
   const promise_exUser: Promise<UserInterface | null> = db.User.findOne({ where: { identity: id } });
   const promise_exConsumer: Promise<ConsumerInterface | null> = db.Consumer.findOne({ where: { client_id } });
