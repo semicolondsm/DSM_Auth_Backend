@@ -28,7 +28,6 @@ const dsmLogin: BusinessLogic = async (req, res, next) => {
     throw new HttpError(400, "Bad Request");
   } 
   const code: string = v4();
-  redisClient.set(client_id, code);
   redisClient.set(code, exUser.identity!, "EX", (60*60*24*14+200));
 
   res.status(200).json({
@@ -50,18 +49,16 @@ const provideToken: BusinessLogic = async (req, res, next) => {
     throw new HttpError(401, "Unauthorized Secret Key");
   }
   // query string code authentication
-  const codeData: string | null = await asyncRedistGet(client_id); // nullable 
-  if(codeData && codeData === code) {
-    const user_identity: string = await asyncRedistGet(codeData) as string;
-    const accessToken: string = await issuanceToken.access(user_identity, client_id);
-    const refreshToken: string = await issuanceToken.refresh(user_identity, client_id);
-    res.status(200).json({
-      "access-token": accessToken,
-      "refresh-token": refreshToken,
-    });
-  } else {
-    throw new HttpError(403, "Forbidden Code");
+  const user_identity: string = await asyncRedistGet(code) as string;
+  if(!user_identity) {
+    throw new HttpError(403, "Forbidden code");
   }
+  const accessToken: string = await issuanceToken.access(user_identity, client_id);
+  const refreshToken: string = await issuanceToken.refresh(user_identity, client_id);
+  res.status(200).json({
+    "access-token": accessToken,
+    "refresh-token": refreshToken,
+  });
 }
 
 const refreshToken: BusinessLogic = async (req, res, next) => {
