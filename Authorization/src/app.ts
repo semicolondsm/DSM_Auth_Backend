@@ -10,6 +10,7 @@ import cors from "cors";
 import { Request, Response, NextFunction } from "express";
 import { db } from "./models/index";
 import dsmAuthRouter from "./routes";
+import { HttpError } from "./middleware/errorHandler/customError";
 
 dotenv.config({ path: path.join(__dirname, "../.env")});
 
@@ -37,9 +38,15 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
 app.use("/", dsmAuthRouter);
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(404).send("sorry, cannot found");
 });
+
+app.use((err: HttpError, req: Request, res: Response) => {
+  res.status(err.status || 500).json({ message: err.status !== 500 ? err.message : "" });
+})
 
 export default app;
