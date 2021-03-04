@@ -5,7 +5,6 @@ WORKDIR /root
 COPY . .
 
 RUN npm install 
-RUN npm audit fix
 RUN npx tsc 
 
 ENV NODE_ENV production
