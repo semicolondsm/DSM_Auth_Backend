@@ -28,7 +28,7 @@ const dsmLogin: BusinessLogic = async (req, res, next) => {
     throw new HttpError(400, "Bad Request");
   } 
   const code: string = v4();
-  redisClient.set(code, exUser.identity!, "EX", (60*60*24*14+200));
+  redisClient.set(code, exUser.identity!, "EX", 90);
 
   res.status(200).json({
     location: `${redirect_url}?code=${code}`,
@@ -58,6 +58,9 @@ const provideToken: BusinessLogic = async (req, res, next) => {
   res.status(200).json({
     "access-token": accessToken,
     "refresh-token": refreshToken,
+  });
+  redisClient.del(code, (err) => {
+    if(err) console.log(err);
   });
 }
 
