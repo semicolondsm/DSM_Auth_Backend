@@ -4,7 +4,7 @@ import { errorHandler } from "../middleware/errorHandler/errorHandler";
 import { BusinessLogic } from "../middleware/businessLogicInterface";
 
 import { verifyRefreshToken } from "../middleware/verifyRefreshToken";
-import { validationRequest } from "../middleware/validationParameter";
+import { validationRequest } from "../middleware/validationRequest";
 import { DsmAuthenticationSchema } from "../dto/dsmAuthentication.dto";
 
 const router: express.Router = express.Router();
