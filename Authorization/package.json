@@ -53,7 +53,7 @@
     "@types/express": "github:types/express",
     "@types/express-session": "^1.17.2",
     "@types/jsonwebtoken": "^8.5.0",
-    "@types/mocha": "^8.0.4",
+    "@types/mocha": "^8.2.2",
     "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.8",
     "@types/nodemailer": "^6.4.0",
