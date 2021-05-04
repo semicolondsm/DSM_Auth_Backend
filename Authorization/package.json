@@ -52,7 +52,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "github:types/express",
     "@types/express-session": "^1.17.2",
-    "@types/jsonwebtoken": "^8.5.0",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/mocha": "^8.0.4",
     "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.8",
