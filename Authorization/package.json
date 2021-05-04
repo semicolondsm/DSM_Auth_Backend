@@ -48,7 +48,7 @@
     "@types/chai": "^4.2.14",
     "@types/connect-redis": "0.0.15",
     "@types/cookie-parser": "^1.4.2",
-    "@types/cors": "^2.8.8",
+    "@types/cors": "^2.8.10",
     "@types/dotenv": "^8.2.0",
     "@types/express": "github:types/express",
     "@types/express-session": "^1.17.2",
