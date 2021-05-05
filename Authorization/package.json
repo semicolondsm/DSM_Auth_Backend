@@ -51,7 +51,7 @@
     "@types/cors": "^2.8.10",
     "@types/dotenv": "^8.2.0",
     "@types/express": "github:types/express",
-    "@types/express-session": "^1.17.2",
+    "@types/express-session": "^1.17.3",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/mocha": "^8.2.2",
     "@types/jsonwebtoken": "^8.5.1",
